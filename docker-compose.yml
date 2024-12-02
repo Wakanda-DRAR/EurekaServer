@@ -9,7 +9,7 @@ services:
       - ./target/eureka-server-0.0.1-SNAPSHOT.jar:/app/eureka-server.jar
     entrypoint: ["java", "-jar", "/app/eureka-server.jar"]
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/mydb
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3312/eureka_server
       SPRING_DATASOURCE_USERNAME: admin
       SPRING_DATASOURCE_PASSWORD: admin
       SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
@@ -28,7 +28,7 @@ services:
       MYSQL_USER: admin
       MYSQL_PASSWORD: admin
     ports:
-      - "3306:3306"
+      - "3312:3306"
     volumes:
       - mysql_data:/var/lib/mysql
     networks:
