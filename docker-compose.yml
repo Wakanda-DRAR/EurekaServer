@@ -1,0 +1,41 @@
+version: "3.8"
+services:
+  eureka-server:
+    image: eureka-server:latest
+    container_name: eureka-server
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8761:8761" # Mapea el puerto 8761 del contenedor al host
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/mydb
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: admin
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
+    depends_on:
+      - mysql
+    networks:
+      - eureka-network
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: eureka_server
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+    ports:
+      - "3306:3306" # Mapea el puerto 3306 del contenedor al host
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - eureka-network
+
+networks:
+  eureka-network:
+
+volumes:
+  mysql_data:
