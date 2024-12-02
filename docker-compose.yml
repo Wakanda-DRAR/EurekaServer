@@ -1,13 +1,13 @@
 version: "3.8"
 services:
   eureka-server:
-    image: openjdk:17-jdk-slim # Imagen base que usaremos para ejecutar el jar
+    image: openjdk:17-jdk-slim
     container_name: eureka-server
     ports:
       - "8761:8761"
     volumes:
-      - ./target/eureka-server-0.0.1-SNAPSHOT.jar:/app/eureka-server.jar
-    entrypoint: ["java", "-jar", "/app/eureka-server.jar"]
+      - ./target/EurekaServer-0.0.1-SNAPSHOT.jar:/app/eurekaserver.jar
+    entrypoint: [ "java", "-jar", "/app/eurekaserver.jar" ]
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3312/eureka_server
       SPRING_DATASOURCE_USERNAME: admin
