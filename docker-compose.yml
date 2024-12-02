@@ -1,13 +1,13 @@
 version: "3.8"
 services:
   eureka-server:
-    image: eureka-server:latest
+    image: openjdk:17-jdk-slim # Imagen base que usaremos para ejecutar el jar
     container_name: eureka-server
-    build:
-      context: .
-      dockerfile: Dockerfile
     ports:
-      - "8761:8761" # Mapea el puerto 8761 del contenedor al host
+      - "8761:8761"
+    volumes:
+      - ./target/eureka-server-0.0.1-SNAPSHOT.jar:/app/eureka-server.jar
+    entrypoint: ["java", "-jar", "/app/eureka-server.jar"]
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/mydb
       SPRING_DATASOURCE_USERNAME: admin
@@ -28,7 +28,7 @@ services:
       MYSQL_USER: admin
       MYSQL_PASSWORD: admin
     ports:
-      - "3306:3306" # Mapea el puerto 3306 del contenedor al host
+      - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
     networks:
