@@ -1,0 +1,13 @@
+# Eureka Server
+
+Este proyecto es un servidor Eureka que se utiliza para registrar y descubrir varios microservicios.
+
+# Link al repositorio
+
+https://github.com/Wakanda-DRAR/EurekaServer.git
+
+## Requisitos
+
+- Java 17
+- Maven
+- Docker y Docker Compose
