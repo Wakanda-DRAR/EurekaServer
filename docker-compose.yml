@@ -1,0 +1,41 @@
+version: "3.8"
+services:
+  eureka-server:
+    image: openjdk:17-jdk-slim
+    container_name: eureka-server
+    ports:
+      - "8761:8761"
+    volumes:
+      - ./target/EurekaServer-0.0.1-SNAPSHOT.jar:/app/eurekaserver.jar
+    entrypoint: [ "java", "-jar", "/app/eurekaserver.jar" ]
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/eureka_server
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: admin
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
+    depends_on:
+      - mysql
+    networks:
+      - eureka-network
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: eureka_server
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - eureka-network
+
+networks:
+  eureka-network:
+
+volumes:
+  mysql_data:
