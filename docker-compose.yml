@@ -9,9 +9,9 @@ services:
     networks:
       - eureka-network
 
-  microservice-client:
-    image: microservice-client
-    container_name: microservice-client
+  gestion-risiduos:
+    image: gestion-residuos
+    container_name: gestion-residuos
     ports:
       - "8080:8080"
     environment:
