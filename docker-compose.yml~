@@ -9,6 +9,18 @@ services:
     networks:
       - eureka-network
 
+  gestion-risiduos:
+    image: gestion-residuos
+    container_name: gestion-residuos
+    ports:
+      - "8080:8080"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+    depends_on:
+      - eureka-server
+    networks:
+      - eureka-network
+
   gestion-emergencias:
     image: gestion-emergencias
     container_name: gestion-emergencias
