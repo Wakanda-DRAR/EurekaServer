@@ -28,6 +28,9 @@ services:
       - "8081:8081"
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+      - SPRING_DATASOURCE_URL=jdbc:mysql://gestion-emergencias-db:3308/gestion_emergencias
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=admin
     depends_on:
       - eureka-server
     networks:
@@ -45,8 +48,6 @@ services:
       - "3308:3306"
     networks:
       - eureka-network
-
-
 
 networks:
   eureka-network:
