@@ -33,6 +33,19 @@ services:
     networks:
       - eureka-network
 
+  gestion-emergencias-db:
+    image: mysql:latest
+    container_name: gestion-emergencias-db
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=gestion_emergencias
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=admin
+    ports:
+      - "3308:3306"
+    networks:
+      - eureka-network
+
 
 
 networks:
