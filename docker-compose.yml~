@@ -20,20 +20,7 @@ services:
       - eureka-server
     networks:
       - eureka-network
-
-  gestion-emergencias:
-    image: gestion-emergencias
-    container_name: gestion-emergencias
-    ports:
-      - "8081:8081"
-    environment:
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
-    depends_on:
-      - eureka-server
-    networks:
-      - eureka-network
-
-
+  
 
 networks:
   eureka-network:
