@@ -18,6 +18,20 @@ services:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
     depends_on:
       - eureka-server
+      - gestion_residuos_database
+    networks:
+      - eureka-network
+
+  gestion_residuos_database:
+    image: mysql:latest
+    container_name: gestion_residuos_database
+    environment:
+     - MYSQL_ROOT_PASSWORD=admin
+     - MYSQL_DATABASE=gestion_residuos_db
+     - MYSQL_USER=admin
+     - MYSQL_PASSWORD=admin
+    ports:
+      - "3307:3306"
     networks:
       - eureka-network
 
