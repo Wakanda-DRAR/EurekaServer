@@ -9,7 +9,7 @@ services:
     networks:
       - eureka-network
 
-  gestion-risiduos:
+  gestion-residuos:
     image: gestion-residuos
     container_name: gestion-residuos
     ports:
