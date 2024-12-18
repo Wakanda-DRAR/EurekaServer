@@ -7,7 +7,6 @@ services:
     networks:
       - eureka-network
 
-
   gestion-agua:
     image: gestion-agua
     container_name: gestion-agua
@@ -20,8 +19,7 @@ services:
       - agua_db
     networks:
       - eureka-network
-      
-      
+
   gestion-residuos:
     image: gestion-residuos
     container_name: gestion-residuos
@@ -45,7 +43,6 @@ services:
       - MYSQL_PASSWORD=admin
     ports:
       - "3308:3306"
-      - gestion_residuos_database
     networks:
       - eureka-network
 
@@ -53,28 +50,27 @@ services:
     image: mysql:latest
     container_name: gestion_residuos_database
     environment:
-     - MYSQL_ROOT_PASSWORD=admin
-     - MYSQL_DATABASE=gestion_residuos_db
-     - MYSQL_USER=admin
-     - MYSQL_PASSWORD=admin
+      - MYSQL_ROOT_PASSWORD=admin
+      - MYSQL_DATABASE=gestion_residuos_db
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=admin
     ports:
       - "3307:3306"
     networks:
       - eureka-network
 
   gestion-energia:
-      image: gestion-energia
-      container_name: gestion-energia
-      ports:
-        - "8083:8083"
-      environment:
-        - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
-      depends_on:
-        - eureka-server
-        - gestion_energia_database
-      networks:
-        - eureka-network
-
+    image: gestion-energia
+    container_name: gestion-energia
+    ports:
+      - "8083:8083"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+    depends_on:
+      - eureka-server
+      - gestion_energia_database
+    networks:
+      - eureka-network
 
   gestion_energia_database:
     image: mysql:latest
@@ -90,30 +86,30 @@ services:
       - eureka-network
 
   gestion-emergencias:
-      image: gestion-emergencias
-      container_name: gestion-emergencias
-      ports:
-        - "8081:8081"
-      environment:
-        - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
-      depends_on:
-        - eureka-server
-        - gestion-emergencias-db
-      networks:
-        - eureka-network
+    image: gestion-emergencias
+    container_name: gestion-emergencias
+    ports:
+      - "8081:8081"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+    depends_on:
+      - eureka-server
+      - gestion-emergencias-db
+    networks:
+      - eureka-network
 
   gestion-emergencias-db:
-      image: mysql:latest
-      container_name: gestion-emergencias-db
-      environment:
-        - MYSQL_ROOT_PASSWORD=root
-        - MYSQL_DATABASE=gestion_emergencias
-        - MYSQL_USER=admin
-        - MYSQL_PASSWORD=admin
-      ports:
-        - "3312:3306"
-      networks:
-        - eureka-network
+    image: mysql:latest
+    container_name: gestion-emergencias-db
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=gestion_emergencias
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=admin
+    ports:
+      - "3312:3306"
+    networks:
+      - eureka-network
 
 networks:
   eureka-network:
