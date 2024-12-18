@@ -20,7 +20,20 @@ services:
       - agua_db
     networks:
       - eureka-network
-
+      
+      
+ gestion-residuos:
+    image: gestion-residuos
+    container_name: gestion-residuos
+    ports:
+      - "8080:8080"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+    depends_on:
+      - eureka-server
+      - gestion_residuos_database
+    networks:
+      - eureka-network
 
   agua_db:
     image: mysql:latest
@@ -32,6 +45,20 @@ services:
       - MYSQL_PASSWORD=admin
     ports:
       - "3308:3306"
+      - gestion_residuos_database
+    networks:
+      - eureka-network
+
+  gestion_residuos_database:
+    image: mysql:latest
+    container_name: gestion_residuos_database
+    environment:
+     - MYSQL_ROOT_PASSWORD=admin
+     - MYSQL_DATABASE=gestion_residuos_db
+     - MYSQL_USER=admin
+     - MYSQL_PASSWORD=admin
+    ports:
+      - "3307:3306"
     networks:
       - eureka-network
 
