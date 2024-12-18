@@ -71,6 +71,7 @@ services:
         - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
       depends_on:
         - eureka-server
+        - gestion_energia_database
       networks:
         - eureka-network
 
