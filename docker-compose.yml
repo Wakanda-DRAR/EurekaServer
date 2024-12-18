@@ -62,10 +62,6 @@ services:
     networks:
       - eureka-network
 
-networks:
-  eureka-network:
-    name: eureka-network
-
   gestion-energia:
       image: gestion-energia
       container_name: gestion-energia
@@ -91,3 +87,7 @@ networks:
       - "3310:3306"
     networks:
       - eureka-network
+
+networks:
+  eureka-network:
+    name: eureka-network
