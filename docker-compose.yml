@@ -65,3 +65,29 @@ services:
 networks:
   eureka-network:
     name: eureka-network
+
+  gestion-energia:
+      image: gestion-energia
+      container_name: gestion-energia
+      ports:
+        - "8083:8083"
+      environment:
+        - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+      depends_on:
+        - eureka-server
+      networks:
+        - eureka-network
+
+
+  gestion_energia_database:
+    image: mysql:latest
+    container_name: gestion_energia_database
+    environment:
+      - MYSQL_ROOT_PASSWORD=admin
+      - MYSQL_DATABASE=gestion_energia_db
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=admin
+    ports:
+      - "3310:3306"
+    networks:
+      - eureka-network
